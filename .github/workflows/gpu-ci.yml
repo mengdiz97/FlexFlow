@@ -87,6 +87,11 @@ jobs:
           ../config/config.linux
           make -j
 
+      - name: Run flexflow alignment with pytorch
+        run: |
+          # run alingment tests
+          ./tests/align/test_all_operators.sh
+
       - name: Check FlexFlow Python interface (before installation)
         run: |
           export PATH=/opt/conda/bin:$PATH
@@ -107,12 +112,6 @@ jobs:
           export PATH=/opt/conda/bin:$PATH
           export FF_HOME=$(pwd)
           ./tests/python_interface_test.sh after-installation
-
-      # TODO: need fix in https://github.com/flexflow/FlexFlow/pull/669
-      # - name: Run flexflow alignment with pytorch
-      #   run: |
-      #     # run alingment tests
-      #     ./tests/align/test_all_operators.sh
 
   gpu-ci-flexflow:
     name: Single Machine, Multiple GPUs Tests
